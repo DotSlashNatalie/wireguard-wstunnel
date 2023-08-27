@@ -1,0 +1,12 @@
+[Unit]
+Description=Tunnel WireGuard UDP over websocket
+After=network.target
+
+[Service]
+Type=simple
+User=nobody
+ExecStart=wstunnel -v --udp --udpTimeoutSec -1 -L 127.0.0.1:51820:127.0.0.1:51820 --upgradePathPrefix 'wss' --websocketPingFrequencySec=999  wss://{hostname}
+Restart=no
+
+[Install]
+WantedBy=multi-user.target
